@@ -5,14 +5,11 @@ import { signIn } from 'next-auth/react'
 import {FcGoogle} from 'react-icons/fc'
 import {FaGithub} from 'react-icons/fa'
 
-import { useRouter } from "next/router";
-
 const Auth = () => {
 
     const [name , setName] = useState("");
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
-    const router = useRouter();
 
 
     const [variant , setVariant] = useState('login')
@@ -27,17 +24,14 @@ const Auth = () => {
             await signIn('credentials' , {
                 email,
                 password,
-                redirect: false,
-                callbackUrl: '/'
+                callbackUrl: '/profiles'
             })
-
-            router.push('/');
         }
         catch(error)
         {
             console.log(error)
         }
-    } , [email , password , router])
+    } , [email , password])
 
 
 
@@ -90,12 +84,12 @@ return(
 
                         <div className="w-10 h-10 bg-white flex items-center justify-center rounded-full cursor-pointer
                         hover:opacity-80 transition ">
-                            <FcGoogle onClick={ () => { signIn('google' , { callbackUrl: '/'})}}  size={30}/>
+                            <FcGoogle onClick={ () => { signIn('google' , { callbackUrl: '/profiles'})}}  size={30}/>
                         </div>
 
                         <div className="w-10 h-10 bg-white flex items-center justify-center rounded-full cursor-pointer
                         hover:opacity-80 transition ">
-                            <FaGithub onClick={() => { signIn('github' , { callbackUrl: '/'}) }}  size={30}/>
+                            <FaGithub onClick={() => { signIn('github' , { callbackUrl: '/profiles'}) }}  size={30}/>
                         </div>
 
                     </div>
